@@ -1,0 +1,103 @@
+{
+  "summary": {
+    "FIXED": {
+      "n": 8,
+      "meanMassRatio": 3.2687062355838075,
+      "medianMassRatio": 0.18531338188754748,
+      "meanFinalMassRatio": 3.58492869727246,
+      "meanEnergyRatio": 0.6995492296391204,
+      "declineCount": 6,
+      "declineDetectionSteps": [
+        810,
+        1050,
+        780,
+        1020,
+        null,
+        900,
+        null,
+        630
+      ],
+      "meanActivity": 0.010686594101193613
+    },
+    "RANDOM": {
+      "n": 8,
+      "meanMassRatio": 3.2925283915769117,
+      "medianMassRatio": 0.22495907863541487,
+      "meanFinalMassRatio": 3.620648847076521,
+      "meanEnergyRatio": 0.7123974079638333,
+      "declineCount": 6,
+      "declineDetectionSteps": [
+        870,
+        1170,
+        1200,
+        930,
+        null,
+        1260,
+        null,
+        660
+      ],
+      "meanActivity": 0.012077421270033474
+    },
+    "Q_LEARNING": {
+      "n": 8,
+      "meanMassRatio": 3.2821466193160376,
+      "medianMassRatio": 0.2107694317360675,
+      "meanFinalMassRatio": 3.5855306843893597,
+      "meanEnergyRatio": 0.7047213070025495,
+      "declineCount": 6,
+      "declineDetectionSteps": [
+        810,
+        1350,
+        870,
+        1020,
+        null,
+        900,
+        null,
+        630
+      ],
+      "meanActivity": 0.011294953151332544
+    }
+  },
+  "paired": {
+    "FIXED": {
+      "meanDifference": 0.013440383732230145,
+      "medianDifference": 0.0,
+      "wins": 3,
+      "ties": 3,
+      "losses": 2,
+      "relativeDifferenceOfGroupMeans": 0.004111835926372098,
+      "exploratorySignFlipP": 0.25,
+      "differences": [
+        0.0,
+        0.05436057015183379,
+        0.01773070228183679,
+        0.0,
+        0.048292290026520135,
+        -0.0008308637209740732,
+        -0.012029628881375487,
+        0.0
+      ]
+    },
+    "RANDOM": {
+      "meanDifference": -0.010381772260874125,
+      "medianDifference": -0.009343384021399531,
+      "wins": 3,
+      "ties": 0,
+      "losses": 5,
+      "relativeDifferenceOfGroupMeans": -0.0031531306722921704,
+      "exploratorySignFlipP": 0.640625,
+      "differences": [
+        -0.012906178108842425,
+        0.02982329249430621,
+        -0.06262883376060763,
+        0.0175547174798264,
+        -0.07846061680773708,
+        -0.07878308366832293,
+        0.10812711421834109,
+        -0.005780589933956637
+      ]
+    }
+  },
+  "repeatMaxAbsoluteDifference": 0.0,
+  "allInitialHashesMatched": true
+}
