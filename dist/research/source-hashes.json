@@ -1,0 +1,11 @@
+{
+  "created_before_execution_utc": "2026-09-25T07:20:18.413547+00:00",
+  "sha256": {
+    "PROTOCOL.md": "19dfba7125df7a2674ccfe4315a455b272f16dd139767818ce77532495165e61",
+    "source/benchmark.js": "891ce4690309e51a472fd070b787941afbcd680f19ce61c76bc0b4adeb32bfd0",
+    "source/js/worlds.js": "466de34a5c1cc39d1309e45e3b9a4ef302fbf3c2c8976207bfa24391a7e1f6b8",
+    "source/js/caretaker.js": "bad99696cc5b95c24e3e7b1d2f4a82063b9a1f72d832e654192b97ae3cfbec8e",
+    "source/js/engine.js": "adee51ab9aaa8b3662e530ec0ff4a7c23cc5b82791320f0f0bbecd5f9639d0c9",
+    "source/js/shaders/glsl.js": "29e5eedcf7fd1ced73d245a1cc42093c2f4af83605c883b74fade07048c4e533"
+  }
+}
