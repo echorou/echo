@@ -1,0 +1,9 @@
+.DS_Store
+node_modules/
+__pycache__/
+*.pyc
+.env
+.env.*
+.openai/
+benchmark/rerun-results.json
+benchmark/rerun-results.tmp
