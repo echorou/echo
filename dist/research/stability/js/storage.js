@@ -1,0 +1,3 @@
+const db=()=>new Promise((resolve,reject)=>{const r=indexedDB.open('echo-life',1);r.onupgradeneeded=()=>r.result.createObjectStore('world');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
+export async function saveWorld(data){const d=await db();try{await new Promise((resolve,reject)=>{const t=d.transaction('world','readwrite');t.objectStore('world').put(data,'latest');t.oncomplete=resolve;t.onerror=()=>reject(t.error);t.onabort=()=>reject(t.error);});}finally{d.close();}}
+export async function loadWorld(){const d=await db();try{return await new Promise((resolve,reject)=>{const r=d.transaction('world').objectStore('world').get('latest');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});}finally{d.close();}}

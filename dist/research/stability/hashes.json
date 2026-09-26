@@ -1,0 +1,14 @@
+{
+  "before.json": "bb63eeb0bbb5368cb0fd948a6016bb377993ece3e7d526fe8b984f43a410e97f",
+  "audit.js": "ef39158e720717f94d313657dced9ea3dbc4b70666bddb8dd95f74fb8ee47dbe",
+  "after.json": "0edf47ccc5100ee4591ab14c8362eedeaad9ed7e47580d910121aae4e003058f",
+  "README.md": "0dc9ca9e33e107d6d345e8c0f6128bcb542845ab8e01fbf983a665516163f5bb",
+  "audit.html": "649d83f93238606f6eacef579b368aa5dda1c089bfde54e1ca64ae96798416a3",
+  "js/worlds.js": "466de34a5c1cc39d1309e45e3b9a4ef302fbf3c2c8976207bfa24391a7e1f6b8",
+  "js/metrics.js": "e2a54d848e32a597f9f08acbb2762d29ddf54e5ba43a41c4b0ab02daf48866d5",
+  "js/caretaker.js": "bad99696cc5b95c24e3e7b1d2f4a82063b9a1f72d832e654192b97ae3cfbec8e",
+  "js/engine.js": "adee51ab9aaa8b3662e530ec0ff4a7c23cc5b82791320f0f0bbecd5f9639d0c9",
+  "js/app.js": "508995efa6ce3cf672bead46de0aca2ba8d8677d8d112adefeab29488001730c",
+  "js/storage.js": "7e3cf7b2f275b8d0141ca9e79aa610321d38ba825c9b0ee9458745e7496bc70c",
+  "js/shaders/glsl.js": "fdfe23b39fa155df55505f61b13cbc3d25f6774e45ea1ebf9b9a4eac7540c288"
+}
