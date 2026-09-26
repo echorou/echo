@@ -81,3 +81,7 @@ The unit tests cover caretaker feedback, finite learning values, serialization, 
 ## License
 
 MIT. Retain the upstream copyright and permission notice when redistributing upstream code. See [LICENSE](LICENSE) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+## September 25 full review
+
+Build `2026.09.25-c` uses deterministic preset seeds, matched default bodies, and zero initial mutation in both modes. Learning is opt-in. See [review and limitations](dist/research/full-review/README.md), [eight 10000-step default runs](dist/research/full-review/defaults.json), and [24 stress cases including collapses](dist/research/full-review/stress.json). These are engineering regressions, separate from Pilot 01. Both energy equations and starting layouts have changed; old screenshots and benchmark numbers do not describe the current default simulation.
