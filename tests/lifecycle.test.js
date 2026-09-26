@@ -1,0 +1,15 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import vm from 'node:vm';
+import fs from 'node:fs';
+import {Caretaker} from '../dist/js/caretaker.js';
+function harness(){
+ const els=new Map();const el=id=>{if(!els.has(id))els.set(id,{value:({world:'glider',view:'0',camera:'fixed',speed:'1'})[id]||'',checked:true,hidden:true,disabled:false,textContent:'',selectedOptions:[{text:'Lone glider'}],classList:{add(){},remove(){}},getBoundingClientRect:()=>({width:600,height:400}),replaceChildren(){},append(){},addEventListener(){},click(){this.onclick?.();}});return els.get(id);};
+ class Engine{constructor(){this.mass=.3;}ok(){return true;}seed(){this.mass=.3;}step(){}render(){}readback(b){b.fill(0);b[0]=this.mass;}}
+ const ctx={Caretaker,Engine,makeWorld:()=>({}),saveWorld:async()=>{},loadWorld:async()=>null,document:{getElementById:el,createElement:()=>el(Symbol()),createTextNode:t=>t,querySelectorAll:()=>[],hidden:false},window:{addEventListener(){}},matchMedia:()=>({matches:false}),devicePixelRatio:1,requestAnimationFrame(){},setTimeout:()=>1,clearTimeout(){},console,location:{reload(){}},URL,Blob,AbortController};
+ vm.createContext(ctx);let src=fs.readFileSync(new URL('../dist/js/app.js',import.meta.url),'utf8').replace(/^import .*;\n/gm,'');src+='\nglobalThis.check={get engine(){return engine},get params(){return params},get running(){return running},sample,showHealth,restore,save,get tick(){return tick}}';vm.runInContext(src,ctx);return {c:ctx.check,el};
+}
+test('restart resets manual parameters, speed and observation view',()=>{const {c,el}=harness();el('light').value='0';el('light').oninput();el('mutation').value='.015';el('mutation').oninput();el('speed').value='6';el('speed').onchange();el('view').value='4';el('restart').click();assert.equal(c.params.light,.35);assert.equal(c.params.mut,.003);assert.equal(c.params.speed,1);assert.equal(el('view').value,'0');assert.equal(el('auto').checked,true);assert.equal(c.tick,0);});
+test('invisible tissue pauses with recovery state without reseeding',()=>{const {c,el}=harness();c.engine.mass=0;c.showHealth(c.sample());assert.equal(c.running,false);assert.equal(el('world-health').hidden,false);assert.equal(c.engine.mass,0);el('health-restart').click();assert.equal(el('world-health').hidden,true);assert.equal(c.engine.mass,.3);});
+test('invalid GPU measurements are rejected',()=>{const {c}=harness();c.engine.mass=NaN;assert.throws(()=>c.sample(),/invalid numeric/);});
+test('checkpoint restores saved environment after reset',async()=>{const {c,el}=harness();el('light').value='.62';el('light').oninput();await c.save();el('restart').click();c.restore();assert.equal(c.params.light,.62);assert.equal(el('light').value,.62);assert.equal(el('auto').checked,false);});
