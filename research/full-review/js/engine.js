@@ -1,7 +1,7 @@
 // engine.js — WebGL2 setup, MRT ping-pong float textures, Lenia passes, camera, readback.
 // v3: TWO state textures per generation (tex0 primary, tex1 aux) written together
 // via gl.drawBuffers (multiple render targets).
-import { VERT, POTENTIAL_FS, STEP_FS, RENDER_FS } from './shaders/glsl.js?v=20260925c';
+import { VERT, POTENTIAL_FS, STEP_FS, RENDER_FS } from './shaders/glsl.js';
 
 export class Engine {
   constructor(canvas, sizeW = 512, sizeH = 512) {
@@ -146,11 +146,7 @@ export class Engine {
     const gl = this.gl;
     opt = opt || {};
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-    // Show one complete square world; wide canvases must not tile it twice.
-    const side = Math.min(this.canvas.width, this.canvas.height);
-    gl.clearColor(0.025, 0.035, 0.04, 1);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.viewport(Math.floor((this.canvas.width-side)/2), Math.floor((this.canvas.height-side)/2), side, side);
+    gl.viewport(0, 0, this.canvas.width, this.canvas.height);
     gl.useProgram(this.progRender);
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.src.s0);
     gl.uniform1i(this._u(this.progRender, 'uState'), 0);
@@ -159,14 +155,12 @@ export class Engine {
     gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, this.potT);
     gl.uniform1i(this._u(this.progRender, 'uPot'), 2);
     gl.uniform1i(this._u(this.progRender, 'uView'), view);
-    gl.uniform4f(this._u(this.progRender, 'uCam'), cam.x, cam.y, cam.zoom, 1.0);
+    gl.uniform4f(this._u(this.progRender, 'uCam'), cam.x, cam.y, cam.zoom, opt.aspect || 1.0);
     gl.uniform1f(this._u(this.progRender, 'uGenome'), 1.0);
     gl.uniform1f(this._u(this.progRender, 'uShowLight'), opt.showLight ? 1 : 0);
     gl.uniform1f(this._u(this.progRender, 'uLightGrad'), opt.lightGrad ? 1 : 0);
     gl.bindVertexArray(this.vao);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
-    const error = gl.getError();
-    if (error !== gl.NO_ERROR) throw new Error('GPU render failed (' + error + ').');
   }
 
   // Read one of the current source textures ('s0' or 's1') into buf.
@@ -177,8 +171,6 @@ export class Engine {
     gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
     gl.drawBuffers([gl.COLOR_ATTACHMENT0]);
     gl.readPixels(0, 0, this.W, this.H, gl.RGBA, gl.FLOAT, buf);
-    const error = gl.getError();
-    if (error !== gl.NO_ERROR) throw new Error('GPU readback failed (' + error + ').');
     return buf;
   }
 }
